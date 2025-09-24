@@ -1,0 +1,70 @@
+text,label
+My friend is not breathing,not_breathing
+He has stopped breathing,not_breathing
+She is not taking breaths,not_breathing
+Patient is unconscious and not breathing,not_breathing
+He collapsed and isn't breathing,not_breathing
+There's too much blood from his leg,severe_bleeding
+She is bleeding a lot,severe_bleeding
+Blood is coming out nonstop,severe_bleeding
+His hand is cut deeply and bleeding heavily,severe_bleeding
+Arterial bleeding from his arm,severe_bleeding
+She's choking and can't breathe,choking_adult
+My friend is choking on food,choking_adult
+He's choking badly,choking_adult
+Something is stuck in her throat,choking_adult
+Can't breathe because of choking,choking_adult
+My baby is choking,choking_child
+Child is choking on a toy,choking_child
+My kid can't breathe, he's choking,choking_child
+Toddler choking on food,choking_child
+Small child choking badly,choking_child
+I burnt my hand badly,burn
+Fire burned his arm,burn
+Hot water burn on her leg,burn
+Severe burn injury,burn
+Skin burned by oil,burn
+I have a small cut on my finger,minor_cut
+Paper cut on my hand,minor_cut
+Got a tiny cut,minor_cut
+A scratch on my skin,minor_cut
+Just a small wound,minor_cut
+She fainted suddenly,unconscious
+My friend fainted and is not waking up,unconscious
+Someone collapsed unconscious,unconscious
+He is not responding,unconscious
+She passed out,unconscious
+I don't know what to do,unknown
+I'm confused, please help,unknown
+I need some advice,unknown
+Don't know what first aid to give,unknown
+Not sure what happened,unknown
+He was bitten by a snake,snake_bite
+A cobra bit my friend,snake_bite
+There's a snake bite on his leg,snake_bite
+He is swelling after snake bite,snake_bite
+My friend was bitten by a poisonous snake,snake_bite
+
+He has severe chest pain,heart_attack
+My friend is clutching his chest,heart_attack
+She collapsed with chest pain,heart_attack
+He feels pain in left arm and chest,heart_attack
+Looks like he is having a heart attack,heart_attack
+
+He broke his leg,fracture
+Her arm is fractured,fracture
+I think his hand bone is broken,fracture
+She has a broken wrist,fracture
+There's a fracture in his ankle,fracture
+
+He is having difficulty breathing after eating,allergic_reaction
+Swelling on face after food,allergic_reaction
+She has severe allergic reaction,allergic_reaction
+He is in shock due to allergy,allergic_reaction
+His lips are swelling after insect bite,allergic_reaction
+
+He fainted due to hot weather,heatstroke
+She collapsed under the sun,heatstroke
+High fever and dehydration,heatstroke
+Heatstroke symptoms visible,heatstroke
+Excessive sweating and dizziness,heatstroke
