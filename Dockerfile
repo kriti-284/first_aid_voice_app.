@@ -12,8 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port the app will run on
-ENV PORT 8080
-EXPOSE $PORT
+EXPOSE 8080
 
 # The command to start your application (using Gunicorn for production)
 CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker "main:app" --bind "0.0.0.0:${PORT:-8080}"
