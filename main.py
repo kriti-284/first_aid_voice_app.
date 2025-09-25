@@ -1,48 +1,29 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import google.generativeai as genai
-import os
+import joblib
 
-# Set up the FastAPI app
+# Load trained model
+model = joblib.load("first_aid_model.pkl")
+
+# First-aid advice dictionary
+first_aid_advice = {
+    "heart_attack": "Call emergency services immediately. Keep the person seated, calm, and loosen tight clothing.",
+    "burn": "Cool the burn under running water for 10–20 minutes. Do not apply ice directly.",
+    "fracture": "Immobilize the affected area. Avoid moving the limb. Seek medical help immediately.",
+    "choking": "Give 5 back blows and 5 abdominal thrusts. If unconscious, start CPR and call emergency services.",
+    "bleeding": "Apply direct pressure with a clean cloth. Keep the person still and seek medical help if severe."
+}
+
+# Initialize FastAPI
 app = FastAPI()
 
-# Configuration for the generative model
-# This assumes an environment variable 'GEMINI_API_KEY' is set
-# If not, you'll need to provide your key directly here
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Define input structure
+class UserInput(BaseModel):
+    text: str
 
-# Define the request body model
-class Query(BaseModel):
-    query: str
-
-# Define the chat endpoint
-@app.post("/chat")
-async def chat(query: Query):
-    """
-    Receives a query about a first aid situation and provides
-    guidance based on the Google Gemini model.
-    """
-    try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        
-        # A prompt to guide the model's response
-        system_prompt = "You are a helpful first aid assistant. Provide clear, concise, and safe advice for first aid situations. Always include a strong disclaimer at the beginning, stating that you are not a medical professional and your advice should not replace a real doctor's or emergency services."
-        
-        # Combine the system prompt and the user's query
-        full_prompt = f"{system_prompt}\n\nUser Query: {query.query}"
-        
-        response = model.generate_content(full_prompt)
-        
-        # Check if the response is valid
-        if response and response.text:
-            return {"response": response.text}
-        else:
-            return {"response": "I'm sorry, I couldn't generate a response. Please try again."}
-
-    except Exception as e:
-        return {"error": str(e)}
-
-# A simple root endpoint to confirm the API is running
-@app.get("/")
-async def root():
-    return {"message": "First Aid API is running!"}
+# Prediction endpoint
+@app.post("/predict")
+async def predict(data: UserInput):
+    condition = model.predict([data.text])[0]
+    advice = first_aid_advice.get(condition, "No advice available for this condition.")
+    return {"condition": condition, "advice": advice}
