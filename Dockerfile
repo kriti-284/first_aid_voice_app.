@@ -16,4 +16,4 @@ ENV PORT 8080
 EXPOSE $PORT
 
 # The command to start your application (using Gunicorn for production)
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8080"]
+CMD gunicorn -w 4 -k uvicorn.workers.UvicornWorker "main:app" --bind "0.0.0.0:${PORT:-8080}"
