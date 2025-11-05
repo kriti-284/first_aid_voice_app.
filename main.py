@@ -4,13 +4,11 @@ import joblib
 
 app = FastAPI()
 
-# ✅ Define the input format for the API
 class UserInput(BaseModel):
     symptom: str
 
-# ✅ Load your model and vectorizer
+# ✅ Load only the model (no separate vectorizer)
 model = joblib.load("first_aid_model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
 
 @app.get("/")
 def home():
@@ -18,10 +16,10 @@ def home():
 
 @app.post("/predict")
 def predict_first_aid(user_input: UserInput):
-    text = [user_input.symptom]
-    X = vectorizer.transform(text)
-    prediction = model.predict(X)
-    return {"first_aid_steps": prediction[0]}
-
-
+    try:
+        text = [user_input.symptom]   # model expects a list of strings
+        prediction = model.predict(text)
+        return {"first_aid_steps": prediction.tolist()}
+    except Exception as e:
+        return {"error": str(e)}
 
