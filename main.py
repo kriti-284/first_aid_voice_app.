@@ -4,6 +4,17 @@ import joblib
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware  # 👈 add this near imports
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:5173"] to restrict it
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 class UserInput(BaseModel):
     symptom: str
 
@@ -22,4 +33,5 @@ def predict_first_aid(user_input: UserInput):
         return {"first_aid_steps": prediction.tolist()}
     except Exception as e:
         return {"error": str(e)}
+
 
