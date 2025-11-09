@@ -1,0 +1,154 @@
+/* Reset default margins and make full height */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #1f1f1f;
+  /* Dark background */
+  color: white;
+}
+
+/* App container takes full viewport */
+.app-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header stays at the top */
+.header {
+  padding: 20px;
+  background-color: #111;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Main content fills remaining space */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make Home and Guidance pages take full screen */
+.full-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Mic pulse animation */
+.mic-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.mic-pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(248, 113, 113, 0.5);
+  animation: pulse-ring 2s infinite;
+}
+
+.mic-dot {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f87171;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin: auto;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Input form styling */
+.query-form {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.query-form input {
+  padding: 12px;
+  width: 300px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+.query-form button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #e11d48;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Guidance steps */
+.guidance-container h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.guidance-container h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.guidance-container p {
+  font-size: 20px;
+  max-width: 700px;
+  margin-bottom: 25px;
+}
+
+/* Next button */
+.next-btn {
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #e11d48;
+  color: white;
+  cursor: pointer;
+}
+
+/* Completion message */
+.completion-message {
+  background-color: #16a34a;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
