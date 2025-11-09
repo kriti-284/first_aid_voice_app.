@@ -1,39 +1,57 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import VoiceInput from "./components/VoiceInput";
-import ResultsDisplay from "./components/ResultsDisplay";
-import Footer from "./components/Footer";
-import firstAidData from "./dummyDatatemp";
+import React, { useState } from 'react';
+import Home from './Home';
+import CallingOverlay from './CallingOverlay';
 
-function App() {
-    const [query, setQuery] = useState("");
-    const [result, setResult] = useState("");
+const App = () => {
+  // State to control the visibility of the emergency call overlay
+  const [isCalling, setIsCalling] = useState(false);
+  // New state for theme, default to 'dark'
+  const [theme, setTheme] = useState('dark');
 
-    const handleSearch = () => {
-        const lowerQuery = query.toLowerCase();
-        if (firstAidData[lowerQuery]) {
-            setResult(firstAidData[lowerQuery]);
-        } else {
-            setResult("No instructions found for this condition.");
-        }
-    };
+  // Define colors based on theme
+  const colors = {
+    dark: {
+      appBg: '#1f2937',
+    },
+    light: {
+      appBg: '#f3f4f6',
+    }
+  };
 
-    return (
-        <div
-            style={{
-                minHeight: "100vh", // min-h-screen
-                backgroundColor: "#d1fae5", // bg-green-100
-                display: "flex", // flex
-                flexDirection: "column", // flex-col
-                alignItems: "center", // items-center
-            }}
-        >
-            <Navbar />
-            <VoiceInput query={query} setQuery={setQuery} handleSearch={handleSearch} />
-            <ResultsDisplay result={result} />
-            <Footer />
-        </div>
-    );
-}
+  const toggleTheme = () => {
+    setTheme(current => (current === 'dark' ? 'light' : 'dark'));
+  };
+
+  return (
+    <div
+      style={{
+        height: '100vh',
+        width: '100vw',
+        margin: 0,
+        padding: 0,
+        // Apply dynamic background color
+        backgroundColor: colors[theme].appBg,
+        fontFamily: 'Inter, sans-serif',
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // Set text color for the whole app
+        color: theme === 'dark' ? '#f3f4f6' : '#1f2937',
+        transition: 'background-color 0.5s',
+      }}
+    >
+      {/* Conditionally render the CallingOverlay */}
+      {isCalling && <CallingOverlay onCancel={() => setIsCalling(false)} />}
+
+      {/* Pass theme state, toggle function, and call trigger to Home */}
+      <Home
+        onStartCall={() => setIsCalling(true)}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
+    </div>
+  );
+};
 
 export default App;
